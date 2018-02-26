@@ -1,0 +1,52 @@
+###########################################
+#                                         #
+# This package contains the configuration #
+# for the view groups used in the UI      #
+#                                         #
+###########################################
+homeassistant:
+  customize:
+    group.info_view:
+      icon: mdi:info
+
+
+
+##################################################
+## View Groups
+##################################################
+group:
+#  default_view:
+#    view: yes
+#    entities:
+#      - group.alarm-panel
+
+  info_view:
+    view: yes
+    name: Information
+    entities:
+      - weather.dark_sky
+      - group.environmental_panel
+      - group.finance_panel
+
+  mainfloor_view:
+    view: yes
+    name: Main Floor
+    icon: mdi:hotel
+    entities:
+      - group.kitchen
+      
+  kristians_bedroom:
+    view: yes
+    name: Kristian's Bedroom
+    entities:
+      - light.bedroom_light
+      - switch.discoball
+
+##################################################
+## Sub-View Groups
+##################################################
+  kitchen:
+    name: Kitchen
+    icon: mdi:bowl
+    entities:
+      - media_player.kitchen_home

@@ -1,0 +1,38 @@
+#Servers and stuff
+
+
+
+
+##################################################
+## HomeAssistant Configs
+##################################################
+
+
+##################################################
+## IFTT
+##################################################
+ifttt:
+  key: !secret iftt_key
+
+
+##################################################
+## MQTT
+##################################################
+mqtt:
+  broker: !secret mqtt_broker
+  port: !secret mqtt_port
+  client_id: hassio
+  keepalive: 60
+  protocol: 3.1.1
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  birth_message:
+    topic: 'hass/status'
+    payload: 'online'
+  will_message:
+    topic: 'hass/status'
+    payload: 'offline'
+
+##################################################
+## Docker Switches
+##################################################

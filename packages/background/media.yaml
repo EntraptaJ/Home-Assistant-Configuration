@@ -1,0 +1,51 @@
+#Twitch, etc
+
+
+##################################################
+## Customize
+##################################################
+homeassisant:
+  customize:
+    sensor.linustech:
+      hidden: yes
+
+##################################################
+## Components
+##################################################
+media_extractor:
+
+
+##################################################
+## Sensors
+##################################################
+sensor:
+  - platform: twitch
+    channels:
+      - linustech
+
+##################################################
+## Media Players
+##################################################
+media_player:
+  - platform: cast
+
+discovery:
+
+##################################################
+## Scripts
+##################################################
+script:
+#  cast-linustech:
+#    sequence:
+#      - service: media_extractor.
+#        data:
+#        entity_id: media_player.kristians-monitor
+#        media_content_id: "https://www.twitch.tv/linustech"
+#        media_content_type: "VIDEO"
+
+
+
+##################################################
+## Automation
+##################################################
+#automation:

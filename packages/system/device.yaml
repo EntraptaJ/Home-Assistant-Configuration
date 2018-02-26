@@ -1,0 +1,112 @@
+
+
+##################################################
+## Configuration
+##################################################
+
+hassio:
+
+##################################################
+## Recorder
+##################################################
+recorder:
+  purge_interval: 3
+  purge_keep_days: 10
+
+##################################################
+## Logbook
+##################################################
+logbook:
+  include:
+#    entities:
+#      - switch.
+    domains:
+      - alarm_control_panel
+      - alert
+      - light
+      - sensor
+      - binary_sensor
+      - device_tracker
+      - zwave
+
+#  exclude:
+#    entities:
+#      - sensor.time
+#      - sensor.date
+
+##################################################
+## History
+##################################################
+#https://home-assistant.io/components/history/
+history:
+  use_include_order: True
+  include:
+#    entities:
+#      - switch.heater
+    domains:
+      - alarm_control_panel
+      - alert
+      - light
+      - sensor
+      - binary_sensor
+      - device_tracker
+      - zwave
+
+#  exclude:
+#    entities:
+#      - sensor.time
+#      - sensor.date
+
+##################################################
+## Sensors
+##################################################
+sensor:
+  - platform: scrape
+    resource: https://home-assistant.io
+    select: ".current-version h1"
+
+    #https://home-assistant.io/components/sensor.systemmonitor/
+  - platform: systemmonitor
+    resources:
+      - type: processor_use
+      - type: memory_free
+      - type: ipv4_address
+        arg: eth0
+      - type: disk_free
+        arg: /
+      - type: since_last_boot
+
+    #https://home-assistant.io/components/sensor.version/
+  - platform: version
+    name: version
+
+  - platform: speedtest
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+
+##################################################
+## Scripts
+##################################################
+
+
+##################################################
+## Automation
+##################################################
+automation:
+  - alias: 'Home Assistant: Startup'
+    trigger:
+      platform: homeassistant
+      event: start
+    action:
+      - service: script.ha_mode_set_normal
+#      - service: script.ha_startup
+
+  - alias: 'Update Available Notifications'
+    hide_entity: True
+    trigger:
+      platform: state
+      entity_id: updater.updater
+    action:
+      - service: script.notify_update

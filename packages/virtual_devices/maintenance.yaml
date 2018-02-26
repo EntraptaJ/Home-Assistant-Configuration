@@ -1,0 +1,67 @@
+##########################################
+#                                        #
+# This package contains the automation   #
+# I use for managing my homeassisant     #
+# server                                 #
+#                                        #
+# DEPENDS ON: Profiles                   #
+#                                        #
+##########################################
+
+##################################################
+## Customize
+##################################################
+homeassistant:
+  customize:
+    script.maintenancetiles:
+      custom_ui_state_card: state-card-tiles
+      config:
+        entities:
+          - entity: script.restart_ha
+            icon: mdi:restart
+
+##################################################
+## Groups
+##################################################
+group:
+  maintenance-panel:
+    name: Maintenance
+    icon: mdi:wrench
+    entities:
+      - script.maintenancetiles
+      - input_select.ha_mode
+
+
+
+
+
+
+##################################################
+## Switches
+##################################################
+
+
+
+
+
+
+
+
+##################################################
+## Commands
+##################################################
+
+
+##################################################
+## Scripts
+##################################################
+script:
+  maintenancetiles:
+    sequence:
+  restart_ha:
+    sequence:
+      - service: homeassistant.restart
+
+##################################################
+## Automation
+##################################################

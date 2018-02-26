@@ -1,0 +1,65 @@
+#Locational Module for tracking location and automation based on previous location and arriving and leaving from locations
+
+##################################################
+## Configuration
+##################################################
+
+
+##################################################
+## Customizes
+##################################################
+homeassistant:
+  customize:
+    zone.KJWork:
+      friendly_name: "Kristian's Work"
+    zone.KJCollege:
+      friendly_name: "Kristian's College"
+    zone.YJWork:
+      friendly_name: "Yvette's Work"
+
+##################################################
+## Device Trackers
+##################################################
+device_tracker:
+  - platform: mqtt_json
+    devices:
+      kristian_galaxys8: zanzito/KristiansPhone/location
+      don_n5x: zanzito/Dons5X/location
+      yvette_galaxya5: zanzito/YvettesA5/location
+
+##################################################
+## Variables
+##################################################
+
+
+
+##################################################
+## Zones
+##################################################
+zone:
+  - name: KJWork
+    latitude: !secret kj-work-lat
+    longitude: !secret kj-work-long
+    radius: 25
+    icon: mdi:gas-station
+
+  - name: KJCollege
+    latitude: !secret kj-college-lat
+    longitude: !secret kj-college-long
+    radius: 35
+    icon: mdi:school
+
+  - name: YJWork
+    latitude: !secret yj-work-lat
+    longitude: !secret yj-work-long
+    radius: 25
+    icon: mdi:school
+
+##################################################
+## Scripts
+##################################################
+
+
+##################################################
+## Automations
+##################################################

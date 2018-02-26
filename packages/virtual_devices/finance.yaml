@@ -1,0 +1,33 @@
+###########################################
+#                                         #
+# This package contains the configuration #
+# for the financial components I use      #
+#                                         #
+###########################################
+
+##################################################
+## Customize
+##################################################
+
+
+
+
+
+##################################################
+## Groups
+##################################################
+group:
+  finance_panel:
+    name: finance
+    icon: mdi:dollar
+    entities:
+      - sensor.exchange_rate_1_btc
+
+##################################################
+## Components
+##################################################
+sensor:
+  - platform: bitcoin
+    currency: CAD
+    display_options:
+      - exchangerate
