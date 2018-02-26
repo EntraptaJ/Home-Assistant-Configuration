@@ -41,6 +41,9 @@ group:
     entities:
       - light.bedroom_light
       - switch.discoball
+      
+#Settings
+
 
 ##################################################
 ## Sub-View Groups
