@@ -1,0 +1,16 @@
+## https://home-assistant.io/getting-started/
+## https://home-assistant.io/cookbook/
+## http://www.yamllint.com/
+
+##################################################
+## General
+##################################################
+homeassistant:
+  name: Home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  time_zone: !secret time_zone
+  unit_system: metric
+
+  packages: !include_dir_named packages/

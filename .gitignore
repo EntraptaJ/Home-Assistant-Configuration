@@ -1,0 +1,12 @@
+*
+!*.yaml
+!scenes
+!.gitignore
+!packages
+secrets.yaml
+known_devices.yaml
+automations.yaml
+customize.yaml
+entity_registry.yaml
+scripts.yaml
+sensors.yaml
