@@ -2,7 +2,7 @@
 !*.yaml
 !scenes
 !.gitignore
-!packages
+!packages/
 secrets.yaml
 known_devices.yaml
 automations.yaml
