@@ -43,7 +43,11 @@ group:
       - switch.discoball
       
 #Settings
-
+  settings_view:
+    view: yes
+    name: Settings
+    entities:
+      - sensor.disk_free_
 
 ##################################################
 ## Sub-View Groups
