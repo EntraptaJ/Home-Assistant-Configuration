@@ -31,3 +31,4 @@ home-assistant_v2.db
 *.db-shm
 *.db-wal
 *.sqlite
+custom_components/customizer/__pycache__/__init__.cpython-36.pyc
