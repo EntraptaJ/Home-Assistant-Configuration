@@ -1,0 +1,10 @@
+secrets.yaml
+known_devices.yaml
+.uuid
+home-assistant_v2.db
+deps/
+deps/*
+tts/
+tts/*
+.cloud/
+.cloud/*
