@@ -12,6 +12,7 @@
 *.conf
 *.pickle
 *.json
+.uuid
 secrets.yaml
 known_devices.yaml
 automations.yaml
