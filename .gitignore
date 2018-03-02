@@ -1,8 +1,10 @@
-*
+
 !*.yaml
 !scenes
 !packages/
 !packages/*
+!custom_components/
+!cus
 !.gitignore
 *.pid
 *.xml
