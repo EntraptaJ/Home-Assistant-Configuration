@@ -1,0 +1,41 @@
+
+
+##################################################
+## Configuration
+##################################################
+
+
+
+##################################################
+## Notification Services
+##################################################
+
+
+## Join - Kristian
+notify:
+  - platform: joaoapps_join
+    api_key: !secret join_api_key
+    device_id: !secret join_KristiansS8
+
+## Zanzito - Don
+  - name: DonsNexus5X
+    platform: zanzito
+    device-name: Dons5X
+
+
+
+
+
+##################################################
+## TTS
+##################################################
+tts:
+    #TTS Module
+  - platform: amazon_polly
+    aws_access_key_id: !secret amazon_key
+    aws_secret_access_key: !secret amazon_secret_key
+    text_type: ssml
+
+##################################################
+## Automation
+##################################################

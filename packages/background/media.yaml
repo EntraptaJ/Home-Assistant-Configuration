@@ -1,0 +1,58 @@
+##################################################
+#                                                #
+# This package contains the automation, sensors, #
+# and switches I use for media consumption       #
+#                                                #
+#                                                #
+# DEPENDS ON: Gaming                             #
+#                                                #
+##################################################
+
+##################################################
+## Customize
+##################################################
+
+
+
+
+##################################################
+## Media Players
+##################################################
+
+media_player:
+    # https://home-assistant.io/components/media_player.cast/
+  - platform: cast
+  
+    # https://home-assistant.io/components/media_player.plex/
+  - platform: plex
+  
+##################################################
+## Inputs
+##################################################
+
+
+
+##################################################
+## Sensors
+##################################################
+sensor:
+  - platform: template
+    sensors:
+      monitor_app:
+        friendly_name: "Monitor App"
+        value_template: "{{ states.media_player.monitor.attributes.app_name }}"
+#  - platform: sonarr
+#    api_key: YOUR_API_KEY
+
+##################################################
+## Automation
+##################################################
+automation: 
+  - alias: "Monitor AutoPower"
+    trigger: 
+      platform: state
+      entity_id: media_player.monitor
+      from: 'idle'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.kjxboxonepower

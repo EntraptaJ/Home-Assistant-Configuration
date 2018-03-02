@@ -1,0 +1,64 @@
+#Weather/Environment Module
+
+##################################################
+## Customize
+##################################################
+
+
+
+##################################################
+## Groups
+##################################################
+group:
+  environmental_panel:
+    name: Environment
+    entities:
+      - sun.sun
+      - sensor.moon
+      - sensor.season
+      - binary_sensor.aurora_visibility
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_cloud_coverage
+      - sensor.dark_sky_nearest_storm_distance
+
+##################################################
+## Components
+##################################################
+sun:
+
+##################################################
+## Weather Component
+##################################################
+weather:
+  - platform: darksky
+    api_key: !secret weather_darksky_api
+
+##################################################
+## Sensors
+##################################################
+sensor:
+    #https://home-assistant.io/components/sensor.moon/
+  - platform: moon
+
+    #https://home-assistant.io/components/sensor.season/
+  - platform: season
+
+    #https://home-assistant.io/components/sensor.darksky/
+  - platform: darksky
+    api_key: !secret weather_darksky_api
+    monitored_conditions:
+      - summary
+      - temperature
+      - nearest_storm_distance
+      - cloud_cover
+
+##################################################
+## Binary Sensors
+##################################################
+binary_sensor:
+    #https://home-assistant.io/components/binary_sensor.aurora/
+  - platform: aurora
+
+##################################################
+## Automation
+##################################################

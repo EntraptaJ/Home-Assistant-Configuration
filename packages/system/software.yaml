@@ -1,0 +1,46 @@
+#Servers and stuff
+
+
+
+
+##################################################
+## HomeAssistant Configs
+##################################################
+
+
+##################################################
+## IFTT
+##################################################
+ifttt:
+  key: !secret iftt_key
+
+
+##################################################
+## MQTT
+##################################################
+mqtt:
+  broker: !secret mqtt_broker
+  port: !secret mqtt_port
+  client_id: hassio
+  keepalive: 60
+  protocol: 3.1.1
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  birth_message:
+    topic: 'hass/status'
+    payload: 'online'
+  will_message:
+    topic: 'hass/status'
+    payload: 'offline'
+
+##################################################
+## Docker Switches
+##################################################
+#switch:
+#  - platform: rest
+ #   resource: http://192.168.0.2:8126/container/WebsiteServer
+ #   name: Website Server
+#    body_on: '{"state": "start"}'
+#    body_off: '{"state": "stop"}'
+#    is_on_template: '{{ value_json is not none and value_json.state == "running" }}'
+

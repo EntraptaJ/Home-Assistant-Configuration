@@ -1,0 +1,67 @@
+##################################################
+#                                                #
+# This package contains the automation           #
+# and sensors I use for media/gaming             #
+# devices                                        #
+#                                                #
+# DEPENDS ON: Profiles                           #
+#                                                #
+##################################################
+
+##################################################
+## Customize
+##################################################
+homeassistant:
+  customize:
+    binary_sensor.KJNintendoSwitch:
+      friendly_name: "Kristian's Nintendo Switch"
+      icon: mdi:nintendo-switch
+    binary_sensor.KJXBoxOne:
+      friendly_name: "Kristian's XBox One"
+      icon: mdi:xbox
+
+##################################################
+## Binary Sensors
+##################################################
+binary_sensor:
+  - platform: ping
+    name: KJNintendoSwitch
+    host: 192.168.0.165
+    scan_interval: 20
+  - platform: ping
+    name: KJXBoxOne
+    host: 192.168.0.21
+    scan_interval: 20
+
+##################################################
+## Sensors
+##################################################
+##Sensor
+
+
+##################################################
+## Switches
+##################################################
+switch:
+  - platform: template
+    switches:
+      kjxboxonepower:
+        value_template: "{{ is_state('binary_sensor.kjxboxone', 'on') }}"
+        turn_on:
+          service: shell_command.kjxboxoneon
+        turn_off:
+          service: shell_command.kjxboxoneoff
+
+##################################################
+## Shell Command
+##################################################
+shell_command:
+  #XBox Power
+  kjxboxoneon: curl --silent -k "http://192.168.0.27:5860/?XBox.switch.on"
+  kjxboxoneoff: curl --silent -k "http://192.168.0.27:5860/?XBox.switch.off"
+
+##################################################
+## Automation
+##################################################
+
+  

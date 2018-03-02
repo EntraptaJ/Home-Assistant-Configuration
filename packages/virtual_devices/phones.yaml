@@ -1,0 +1,45 @@
+#Phone Batteries and Information from MQTT
+
+##################################################
+## Customize
+##################################################
+homeassistant:
+  customize:
+    sensor.KJPhoneBatt:
+      friendly_name: "Kristian's Phone Battery"
+    sensor.KJWatchBatt:
+      friendly_name: "Kristian's Watch Battery"
+    sensor.DonPhoneBatt:
+      friendly_name: "Don's Phone Battery"
+
+##################################################
+## Batteries
+##################################################
+sensor:
+  - platform: mqtt
+    name: KJPhoneBatt
+    state_topic: "zanzito/KristiansPhone/device_info"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.battery_level }}'
+
+  - platform: mqtt
+    name: KJWatchBatt
+    state_topic: "KJWatch/hass/Battery"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.batt }}'
+
+  - platform: mqtt
+    name: DonPhoneBatt
+    state_topic: "zanzito/Dons5X/battery_level"
+    unit_of_measurement: "%"
+
+##################################################
+## Other
+##################################################
+binary_sensor:
+  - platform: mqtt
+    name: KJPhoneCharge
+    state_topic: "zanzito/KristiansPhone/device_info"
+    payload_on: "True"
+    payload_off: "False"
+    value_template: '{{ value_json.battery_charging }}'

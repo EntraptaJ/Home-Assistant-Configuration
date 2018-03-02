@@ -1,0 +1,132 @@
+#HTTP, Frontent, Floorplan, Custom Buttons. 
+
+##################################################
+## Customize
+##################################################
+homeassistant:
+  customize_glob:
+    "*.*":
+      custom_ui_state_card: state-card-custom-ui 
+
+##################################################
+## Group
+##################################################
+group:
+  ui_settings_panel:
+    name: UI Settings
+    entities:
+      - input_boolean.ui_automatic_daynight
+      - input_select.ui_theme
+
+##################################################
+## Inputs
+##################################################
+##Input Booleans
+input_boolean:
+  ui_automatic_daynight:
+    name: Automatic Theme
+
+##Input Selects
+input_select:
+  ui_theme:
+    name: UI Theme
+    options:
+      - Light
+      - Dark
+    initial: Light
+
+##################################################
+## Customizer
+##################################################
+customizer:
+  custom_ui: hosted
+
+##################################################
+## HTTP
+##################################################
+#https://home-assistant.io/components/http/
+http:
+  api_password: !secret http_password
+  base_url: !secret http_url
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+  ip_ban_enabled: True
+  login_attempts_threshold: 3
+
+##################################################
+## Front End
+##################################################
+config:
+
+frontend:
+  themes: !include_dir_merge_named /config/themes/
+  extra_html_url:
+    - /local/custom_ui/state-card-tiles.html
+    - /local/custom_ui/state-card-custom-ui.html
+  extra_html_url_es5:
+    - /local/custom_ui/state-card-tiles_es5.html
+
+
+##################################################
+## iFrames
+##################################################
+#panel_iframe:
+
+
+##################################################
+## Custom Buttons
+##################################################
+script:
+  sleep_panel:
+    sequence:
+
+##################################################
+## Automation
+##################################################
+automation:
+  - alias: 'Automatic Day/Night - Night'
+    trigger:
+      - platform: sun
+        event: sunset
+    condition:
+      condition: state
+      entity_id: input_boolean.ui_automatic_daynight
+      state: "on"
+    action:
+      - service: frontend.set_theme
+        data:
+          name: 'dark_theme'
+
+  - alias: 'Automatic Day/Night - Day'
+    trigger:
+      - platform: sun
+        event: sunrise
+    condition:
+      condition: state
+      entity_id: input_boolean.ui_automatic_daynight
+      state: "on"
+    action:
+      - service: frontend.set_theme
+        data:
+          name: 'default'
+
+  - alias: 'Theme Selector - Light'
+    trigger:
+      - platform: state
+        entity_id: input_select.ui_theme
+        to: 'Light'
+    action:
+      - service: frontend.set_theme
+        data:
+          name: 'default'
+
+  - alias: 'Theme Selector - Dark'
+    trigger:
+      - platform: state
+        entity_id: input_select.ui_theme
+        to: 'Dark'
+    action:
+      - service: frontend.set_theme
+        data:
+          name: 'dark_theme'
+          

@@ -1,0 +1,38 @@
+#Network Module
+
+##################################################
+## Customize
+##################################################
+homeassistant:
+  customize:
+    binary_sensor.kjmainserver:
+      friendly_name: "Main Server"
+      icon: mdi:server
+
+##################################################
+## Groups
+##################################################
+group:
+  network_devices:
+    name: Network devices
+    entities:
+      - binary_sensor.kjmainserver
+      - binary_sensor.KJNintendoSwitch
+      - binary_sensor.KJXBoxOne
+
+##################################################
+## Sensors
+##################################################
+
+
+
+##################################################
+## Binary Sensors
+##################################################
+binary_sensor:
+  - platform: ping
+    name: kjmainserver
+    host: 192.168.0.2
+##################################################
+## Automation
+##################################################

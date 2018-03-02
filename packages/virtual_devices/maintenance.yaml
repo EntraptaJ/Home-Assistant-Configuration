@@ -1,0 +1,130 @@
+##################################################
+#                                                #
+# This package contains the automation           #
+# I use for managing my homeassisant             #
+# server                                         #
+#                                                #
+# DEPENDS ON: Profiles                           #
+#                                                #
+##################################################
+
+##################################################
+## Customize
+##################################################
+homeassistant:
+  customize:
+    script.maintenancetiles:
+      custom_ui_state_card: state-card-tiles
+      config:
+        entities:
+          - entity: script.restart_ha
+            icon: mdi:power
+            color: red
+    script.gitmaintenancetiles:
+      custom_ui_state_card: state-card-tiles
+      config:
+        entities:
+          - entity: script.git_pull
+            icon: mdi:arrow-collapse-down
+
+##################################################
+## Groups
+##################################################
+group:
+  maintenance_panel:
+    name: Maintenance
+    icon: mdi:wrench
+    control: hidden
+    entities:
+      - script.maintenancetiles
+      - input_select.ha_mode
+      - input_boolean.git_visible
+  maintenance_git_panel:
+    name: GIT
+    icon: mdi:git
+    entities:
+      - script.gitmaintenancetiles
+      - input_text.git_message
+      - input_text.git_title
+
+##################################################
+## Switches / Input Booleans
+##################################################
+input_boolean:
+  git_visible:
+    name: GIT Panel
+    initial: off
+    icon: mdi:git
+
+##################################################
+## Input Text
+##################################################
+input_text:
+  git_title:
+    name: GIT Commit Title
+    initial: Configuration Updates
+  git_message:
+    name: GIT Commit Message
+    initial: General Updates
+
+##################################################
+## Commands
+##################################################
+shell_command:
+  git_commit: 'git commmit'
+  git_pull: 'git pull'
+  ha_restart: hassio homeassistant restart
+
+##################################################
+## Scripts
+##################################################
+script:
+  maintenancetiles:
+    sequence:
+  gitmaintenancetiles:
+    sequence:
+    
+  git_pull:
+    sequence:
+      - service: shell_command.git_pull
+  restart_ha:
+    sequence:
+      - service: homeassistant.restart
+#  ha_full_update:
+#    sequence:
+#      - service: 
+  
+
+##################################################
+## Automation
+##################################################
+automation:
+  - alias: "GIT Panel - Visible"
+    hide_entity: True
+    initial_state: 'on'
+    trigger:
+      platform: state
+      entity_id: input_boolean.git_visible
+    action:
+      - service: group.set_visibility
+        data_template: 
+          entity_id: group.maintenance_git_panel
+          visible: > 
+            {% if trigger.to_state.state == "on" %}True{% elif trigger.to_state.state == 'off' %}False{% endif %}
+      
+#  - alias: "GIT Panel - Hidden"
+#    hide_entity: True
+#    initial_state: 'on'
+#    trigger:
+#      platform: state
+#      entity_id: input_boolean.git_visible
+#      # Optional
+#      from: 'on'
+#      to: 'off'
+#    action:
+#      - service: group.set_visibility
+#        data:
+#          entity_id: group.maintenance_git_panel
+#          visible: no
+
+

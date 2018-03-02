@@ -1,0 +1,100 @@
+#Development Module for doing work on servers/HASSIO/Network Stuff
+
+##################################################
+## Configuration
+##################################################
+
+
+##################################################
+## Customizes
+##################################################
+homeassistant:
+  customize:
+    input_select.ha_mode:
+      friendly_name: "Mode"
+      icon: mdi:account-settings
+
+group:
+  profile:
+    name: Profile
+    entities:  
+      - input_select.ha_mode
+
+##################################################
+## Inputs
+##################################################
+input_select:
+  ha_mode:
+    name: Mode
+    icon: mdi:account-settings
+    options:
+     - Normal
+     - Emergency
+     - Visitors
+     - Show off
+     - Maintenance
+    initial: Normal
+
+
+##################################################
+## Sensors
+##################################################
+
+
+##################################################
+## Scripts
+##################################################
+script:
+  ha_mode_set_normal:
+    sequence:
+      - service: input_select.select_option
+        entity_id: input_select.ha_mode
+        data:
+          option: Normal
+      - service: group.set_visibility
+        entity_id: group.maintenance_panel
+        data: 
+          visible: False
+      - service: logbook.log
+        data:
+          name: "HomeAssistant Mode"
+          message: "Mode has changed to normal"
+
+  ha_mode_set_maintenance:
+    alias: Start Maintenance mode
+    sequence:
+      - service: input_select.select_option
+        entity_id: input_select.ha_mode
+        data:
+          option: Maintenance
+      - service: group.set_visibility
+        entity_id: group.maintenance_panel
+        data:
+          visible: True
+      - service: logbook.log
+        data:
+          name: "Home Assistant Mode"
+          message: "mode has changed to Maintenance"
+
+##################################################
+## Automation
+##################################################
+automation:
+  - alias: "Maintenance Mode"
+    hide_entity: True
+    trigger:
+      - platform: state
+        entity_id: input_select.ha_mode
+        to: 'Maintenance'
+    action:
+      - service: script.ha_mode_set_maintenance
+
+  - alias: "Not Maintenance Mode"
+    hide_entity: True
+    trigger:
+      - platform: state
+        entity_id: input_select.ha_mode
+        from: 'Maintenance'
+    action:
+      - service: script.ha_mode_set_normal
+
