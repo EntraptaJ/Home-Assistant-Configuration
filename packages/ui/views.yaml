@@ -7,7 +7,7 @@
 homeassistant:
   customize:
     group.info_view:
-      icon: mdi:info
+      icon: mdi:information
 
 
 
@@ -15,10 +15,11 @@ homeassistant:
 ## View Groups
 ##################################################
 group:
-#  default_view:
-#    view: yes
-#    entities:
-#      - group.alarm-panel
+  default_view:
+    name: Home
+    view: yes
+    entities:
+      - group.alarm_panel
 
   info_view:
     view: yes
@@ -27,6 +28,7 @@ group:
       - weather.dark_sky
       - group.environmental_panel
       - group.finance_panel
+      - group.network_devices
 
   mainfloor_view:
     view: yes
@@ -41,14 +43,21 @@ group:
     entities:
       - light.bedroom_light
       - switch.discoball
-      
+      - switch.kjxboxonepower
+      - media_player.monitor
+      - media_player.kristians_bedroom
+      - media_player.kristians_bedroom_home
+
 #Settings
   settings_view:
     view: yes
     name: Settings
     entities:
-      - sensor.disk_free_
-      - sensor.memory_free
+      - group.system_info
+      - group.maintenance_panel
+      - group.maintenance_git_panel
+      - group.ui_settings_panel
+      
 
 ##################################################
 ## Sub-View Groups

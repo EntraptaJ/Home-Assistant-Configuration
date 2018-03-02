@@ -10,18 +10,21 @@
 ## Notification Services
 ##################################################
 
-##################################################
-## Join - Kristian
-##################################################
-#notify:
-#  - platform: joaoapps_join
-#    api_key: !secret join_api_key
-#    device_id: !secret join_KristiansS8
 
-#joaoapps_join:
-#  - name: android
-#    device_id: group.android
-#    api_key: !secret join_api_key
+## Join - Kristian
+notify:
+  - platform: joaoapps_join
+    api_key: !secret join_api_key
+    device_id: !secret join_KristiansS8
+
+## Zanzito - Don
+  - name: DonsNexus5X
+    platform: zanzito
+    device-name: Dons5X
+
+
+
+
 
 ##################################################
 ## TTS

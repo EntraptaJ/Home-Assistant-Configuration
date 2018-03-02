@@ -4,6 +4,14 @@
 !packages/
 !packages/*
 !.gitignore
+*.pid
+*.xml
+*.csr
+*.crt
+*.key
+*.conf
+*.pickle
+*.json
 secrets.yaml
 known_devices.yaml
 automations.yaml
@@ -11,3 +19,12 @@ customize.yaml
 entity_registry.yaml
 scripts.yaml
 sensors.yaml
+*.xml
+.cloud
+OZW_Log.txt
+home-assistant.log
+home-assistant_v2.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite

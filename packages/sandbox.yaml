@@ -1,0 +1,14 @@
+#File I use to test out components before adding them to my organization system
+
+
+variable:
+  private_ip:
+    restore: true
+    attributes:
+      friendly_name: 'Private IP Variable'
+
+#automation:
+#  - alias: "Private IP Change"
+#    trigger:
+      
+

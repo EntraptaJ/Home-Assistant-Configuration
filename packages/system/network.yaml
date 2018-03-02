@@ -13,11 +13,12 @@ homeassistant:
 ## Groups
 ##################################################
 group:
-  network-devices:
+  network_devices:
     name: Network devices
     entities:
       - binary_sensor.kjmainserver
-
+      - binary_sensor.KJNintendoSwitch
+      - binary_sensor.KJXBoxOne
 
 ##################################################
 ## Sensors

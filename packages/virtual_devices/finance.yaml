@@ -18,7 +18,7 @@
 ##################################################
 group:
   finance_panel:
-    name: finance
+    name: Finance
     icon: mdi:dollar
     entities:
       - sensor.exchange_rate_1_btc

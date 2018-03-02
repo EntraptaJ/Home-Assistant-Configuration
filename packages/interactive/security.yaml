@@ -1,14 +1,45 @@
 
 
 ##################################################
+## Customize
+##################################################
+homeassistant:
+  customize:
+    input_boolean.vacation_mode:
+      icon: mdi:beach
+
+##################################################
+## Groups
+##################################################
+group:
+  alarm_panel:
+    name: Alarm
+    control: hidden
+    entities:
+      - group.trackers_main
+      - alarm_control_panel.ha_alarm
+      - input_boolean.vacation_mode
+
+##################################################
 ## Alarm Panel Component
 ##################################################
 alarm_control_panel:
   - platform: manual
-  
+
+##################################################
+## Inputs
+##################################################
+input_boolean:
+  vacation_mode:
+    name: Vacation Mode
+
 ##################################################
 ## Sensors
 ##################################################
+
+
+
+
 
 
 

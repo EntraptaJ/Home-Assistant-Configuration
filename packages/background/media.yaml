@@ -1,51 +1,58 @@
-#Twitch, etc
-
+##################################################
+#                                                #
+# This package contains the automation, sensors, #
+# and switches I use for media consumption       #
+#                                                #
+#                                                #
+# DEPENDS ON: Gaming                             #
+#                                                #
+##################################################
 
 ##################################################
 ## Customize
 ##################################################
-homeassisant:
-  customize:
-    sensor.linustech:
-      hidden: yes
+
+
+
 
 ##################################################
-## Components
+## Media Players
 ##################################################
-media_extractor:
+
+media_player:
+    # https://home-assistant.io/components/media_player.cast/
+  - platform: cast
+  
+    # https://home-assistant.io/components/media_player.plex/
+  - platform: plex
+  
+##################################################
+## Inputs
+##################################################
+
 
 
 ##################################################
 ## Sensors
 ##################################################
 sensor:
-  - platform: twitch
-    channels:
-      - linustech
-
-##################################################
-## Media Players
-##################################################
-media_player:
-  - platform: cast
-
-discovery:
-
-##################################################
-## Scripts
-##################################################
-script:
-#  cast-linustech:
-#    sequence:
-#      - service: media_extractor.
-#        data:
-#        entity_id: media_player.kristians-monitor
-#        media_content_id: "https://www.twitch.tv/linustech"
-#        media_content_type: "VIDEO"
-
-
+  - platform: template
+    sensors:
+      monitor_app:
+        friendly_name: "Monitor App"
+        value_template: "{{ states.media_player.monitor.attributes.app_name }}"
+#  - platform: sonarr
+#    api_key: YOUR_API_KEY
 
 ##################################################
 ## Automation
 ##################################################
-#automation:
+automation: 
+  - alias: "Monitor AutoPower"
+    trigger: 
+      platform: state
+      entity_id: media_player.monitor
+      from: 'idle'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.kjxboxonepower

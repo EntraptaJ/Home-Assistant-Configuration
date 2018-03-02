@@ -1,9 +1,32 @@
 
+##################################################
+## Customize
+##################################################
+homeassistant:
+  customize_glob:
+    group.system_info_badges:
+      state_card_mode: badges
+
+##################################################
+## Groups
+##################################################
+group:
+  system_info:
+    name: System
+    entities:
+      - group.system_info_badges
+      - sensor.ipv4_address_eth0
+      - sensor.version
+      - input_select.ha_mode
+  system_info_badges:
+    entities:
+      - sensor.processor_use
+      - sensor.disk_free_
+      - sensor.memory_free
 
 ##################################################
 ## Configuration
 ##################################################
-
 hassio:
 
 ##################################################
@@ -29,8 +52,10 @@ logbook:
       - device_tracker
       - zwave
 
-#  exclude:
-#    entities:
+  exclude:
+    entities:
+       - sensor.since_last_boot
+       - sensor.dark_sky_summary
 #      - sensor.time
 #      - sensor.date
 
@@ -80,27 +105,40 @@ sensor:
   - platform: version
     name: version
 
-  - platform: speedtest
-    monitored_conditions:
-      - ping
-      - download
-      - upload
+  - platform: fastdotcom
+    minute:
+      - 0
+      - 15
+      - 30
+      - 45
 
 ##################################################
 ## Scripts
 ##################################################
 
 
+
 ##################################################
 ## Automation
 ##################################################
 automation:
+  - alias: 'Home Assistant: Shutdown'
+    trigger:
+      platform: homeassistant
+      event: shutdown
+    action:
+      - service: script.ha_mode_set_normal
+
   - alias: 'Home Assistant: Startup'
     trigger:
       platform: homeassistant
       event: start
     action:
       - service: script.ha_mode_set_normal
+      - service: group.set_visibility
+        data:
+          entity_id: group.maintenance_git_panel
+          visible: no
 #      - service: script.ha_startup
 
   - alias: 'Update Available Notifications'

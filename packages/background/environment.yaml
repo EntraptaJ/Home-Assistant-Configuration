@@ -15,6 +15,11 @@ group:
     entities:
       - sun.sun
       - sensor.moon
+      - sensor.season
+      - binary_sensor.aurora_visibility
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_cloud_coverage
+      - sensor.dark_sky_nearest_storm_distance
 
 ##################################################
 ## Components

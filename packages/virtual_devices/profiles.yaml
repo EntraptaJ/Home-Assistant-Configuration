@@ -14,14 +14,11 @@ homeassistant:
       friendly_name: "Mode"
       icon: mdi:account-settings
 
-
-
 group:
   profile:
     name: Profile
     entities:  
       - input_select.ha_mode
-
 
 ##################################################
 ## Inputs
@@ -51,11 +48,11 @@ script:
   ha_mode_set_normal:
     sequence:
       - service: input_select.select_option
+        entity_id: input_select.ha_mode
         data:
-          entity_id: input_select.ha_mode
           option: Normal
       - service: group.set_visibility
-        entity_id: group.maintenancepanel
+        entity_id: group.maintenance_panel
         data: 
           visible: False
       - service: logbook.log
@@ -67,11 +64,11 @@ script:
     alias: Start Maintenance mode
     sequence:
       - service: input_select.select_option
+        entity_id: input_select.ha_mode
         data:
-          entity_id: input_select.ha_mode
           option: Maintenance
       - service: group.set_visibility
-        entity_id: group.maintenancepanel
+        entity_id: group.maintenance_panel
         data:
           visible: True
       - service: logbook.log
