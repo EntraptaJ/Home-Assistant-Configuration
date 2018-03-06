@@ -3,6 +3,12 @@
 ## Customize
 ##################################################
 homeassistant:
+  customize:
+    sensor.ipv4_address_eth0:
+      friendly_name: 'Local IP Address'
+    sensor.version:
+      friendly_name: 'Local Version'
+      icon: mdi:package-variant
   customize_glob:
     group.system_info_badges:
       state_card_mode: badges
@@ -41,8 +47,8 @@ recorder:
 ##################################################
 logbook:
   include:
-#    entities:
-#      - switch.
+    #entities:
+    # - switch.
     domains:
       - alarm_control_panel
       - alert
@@ -56,8 +62,10 @@ logbook:
     entities:
        - sensor.since_last_boot
        - sensor.dark_sky_summary
-#      - sensor.time
-#      - sensor.date
+       - sensor.time
+       - sensor.date
+    domains:
+      - weblink
 
 ##################################################
 ## History
@@ -67,7 +75,7 @@ history:
   use_include_order: True
   include:
 #    entities:
-#      - switch.heater
+#      - switch.vacation
     domains:
       - alarm_control_panel
       - alert
@@ -77,10 +85,11 @@ history:
       - device_tracker
       - zwave
 
-#  exclude:
-#    entities:
-#      - sensor.time
-#      - sensor.date
+  exclude:
+    entities:
+      - sensor.since_last_boot
+      - sensor.time
+      - sensor.date
 
 ##################################################
 ## Sensors
@@ -105,12 +114,19 @@ sensor:
   - platform: version
     name: version
 
+    #https://home-assistant.io/components/sensor.fastdotcom/
   - platform: fastdotcom
     minute:
       - 0
       - 15
       - 30
       - 45
+
+    #https://home-assistant.io/components/sensor.time_date/
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
 
 ##################################################
 ## Scripts
