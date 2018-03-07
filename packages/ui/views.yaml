@@ -20,6 +20,8 @@ group:
     view: yes
     entities:
       - group.alarm_panel
+      - sensor.kristianfjonesisgmailcom
+      - variable.time
 
   info_view:
     view: yes

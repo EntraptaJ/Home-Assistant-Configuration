@@ -34,6 +34,11 @@ group:
 ## Configuration
 ##################################################
 #hassio:
+variable:
+  time:
+
+
+python_script:
 
 ##################################################
 ## Recorder
@@ -98,6 +103,7 @@ sensor:
   - platform: scrape
     resource: https://home-assistant.io
     select: ".current-version h1"
+    value_template: '{{ value.split(":")[1] }}'
 
     #https://home-assistant.io/components/sensor.systemmonitor/
   - platform: systemmonitor

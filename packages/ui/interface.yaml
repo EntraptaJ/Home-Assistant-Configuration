@@ -3,17 +3,17 @@
 ##################################################
 ## Customize
 ##################################################
-homeassistant:
-  customize_glob:
-    "*.*":
-      custom_ui_state_card: state-card-custom-ui 
+#homeassistant:
+#  customize_glob:
+#    "*.*":
+#      custom_ui_state_card: state-card-custom-ui 
 
 ##################################################
 ## Group
 ##################################################
 group:
   ui_settings_panel:
-    name: UI Settings
+    name: 'UI Settings'
     entities:
       - input_boolean.ui_automatic_daynight
       - input_select.ui_theme
@@ -31,9 +31,9 @@ input_select:
   ui_theme:
     name: UI Theme
     options:
-      - Light
-      - Dark
-    initial: Light
+      - 'Light'
+      - 'Dark'
+    initial: 'Light'
 
 ##################################################
 ## Customizer
@@ -59,12 +59,12 @@ http:
 config:
 
 frontend:
-  themes: !include_dir_merge_named /config/themes/
-  extra_html_url:
-    - /local/custom_ui/state-card-tiles.html
-    - /local/custom_ui/state-card-custom-ui.html
-  extra_html_url_es5:
-    - /local/custom_ui/state-card-tiles_es5.html
+#  themes: !include_dir_merge_named /config/themes/
+#  extra_html_url:
+#    - /local/custom_ui/state-card-tiles.html
+#    - /local/custom_ui/state-card-custom-ui.html
+#  extra_html_url_es5:
+#    - /local/custom_ui/state-card-tiles_es5.html
 
 
 ##################################################
@@ -91,7 +91,7 @@ automation:
     condition:
       condition: state
       entity_id: input_boolean.ui_automatic_daynight
-      state: "on"
+      state: 'on'
     action:
       - service: frontend.set_theme
         data:

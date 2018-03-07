@@ -1,0 +1,7 @@
+
+binary_sensor:
+  - platform: workday
+    name: School
+    country: CA
+    province: 'ON'
+    workdays: [ mon, tue, wed, thu, fri ]
